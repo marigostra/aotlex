@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+export RML=/app/aot
+export CXX=/usr/bin/g++
+export CC=/usr/bin/gcc
+cd $RML
+mkdir build
+cd build
+cmake ..
+make
+mkdir /app/release
+make DESTDIR=/app/release install
+cd /app
+tar -c aot/ release/ > aot.tar

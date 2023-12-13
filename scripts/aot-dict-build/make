@@ -1,0 +1,4 @@
+#!/bin/bash -e
+
+#docker build --no-cache -t aot
+docker build -t aot .
