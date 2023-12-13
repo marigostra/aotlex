@@ -1,0 +1,10 @@
+
+add_subdirectory (AgramtabLib)
+add_subdirectory (common)
+add_subdirectory (contrib)
+add_subdirectory(GraphanLib)
+add_subdirectory (LemmatizerLib)
+add_subdirectory (MorphWizardLib)
+add_subdirectory (PCRE)
+add_subdirectory (RmlThesLib)
+add_subdirectory (StructDictLib)
