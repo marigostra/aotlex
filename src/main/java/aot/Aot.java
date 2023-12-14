@@ -8,12 +8,12 @@ public final class Aot
     private native void initImpl();
     private native byte[] lemmatizeImpl(byte[] word);
 
-    static private boolean jniLoaded = false;
+    static boolean jniLoaded = false;
 
     public void init()
     {
 	if (!jniLoaded)
-	    System.loadLibrary("runyms_jni");
+	    System.loadLibrary("aotlex_jni");
 	jniLoaded = true;
 	initImpl();
     }
