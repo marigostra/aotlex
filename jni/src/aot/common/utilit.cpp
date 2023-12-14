@@ -730,7 +730,8 @@ void AddFile(const char* MainFile, const char* ToAdd)
 
 std::string GetRmlVariable()
 {
-	const char* rml = getenv("RML");
+  //const char* rml = getenv("RML");
+		const char* rml = "aot-data";
 	std::string s;
 	if (rml)
 		s = rml;
