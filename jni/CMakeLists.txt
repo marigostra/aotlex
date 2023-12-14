@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 3.5)
-project(aot)
+project(aotlex)
 
 find_package(JNI)
 if (JNI_FOUND)
@@ -8,7 +8,6 @@ if (JNI_FOUND)
     message (STATUS "JNI_LIBRARIES=${JNI_LIBRARIES}")
 endif()
 
-add_compile_options(--std=c++11)
-add_compile_options(-fpic)
-
+set(CMAKE_BUILD_TYPE Release)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpic -std=c++11")
 add_subdirectory (src)
