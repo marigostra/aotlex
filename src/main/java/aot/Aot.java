@@ -1,6 +1,8 @@
 
 package aot;
 
+import java.io.File;
+
 public final class Aot
 {
     private byte[] core = null;
@@ -12,8 +14,9 @@ public final class Aot
 
     public void init()
     {
-	if (!jniLoaded)
-	    System.loadLibrary("aotlex_jni");
+	if (!jniLoaded) {
+		System.loadLibrary("aotlex_jni");
+	}
 	jniLoaded = true;
 	initImpl();
     }
