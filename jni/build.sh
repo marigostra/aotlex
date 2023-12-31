@@ -9,6 +9,6 @@ pushd build > /dev/null
 cmake ..
 make
 popd > /dev/null
-cp build/src/jni/libaotlex_jni.so .. || yes
-cp build/src/jni/libaotlex_jni.dylib .. || yes
+cp build/src/jni/libaotlex_jni.so .. || true
+cp build/src/jni/libaotlex_jni.dylib .. || true
 
