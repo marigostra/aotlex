@@ -1,0 +1,61 @@
+name: Build jni lib
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        build_type: [Release]
+        c_compiler: [gcc]
+        include:
+          - os: windows-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: macos-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Java JDK
+      uses: actions/setup-java@v4.0.0
+      with:
+        distribution: liberica
+        java-version: 21
+
+          
+    - name: Set reusable strings
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/jni/build" >> "$GITHUB_OUTPUT"
+
+    - name: Configure CMake
+      run: |
+        cd jni
+        cmake -B ${{ steps.strings.outputs.build-output-dir }} -DCMAKE_CXX_COMPILER=/usr/bin/${{ matrix.cpp_compiler }} -DCMAKE_C_COMPILER=/usr/bin/${{ matrix.c_compiler }} -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} -S ${{ github.workspace }}/jni
+
+    - name: Build
+      run: |
+        cd jni
+        ./build.sh
+        
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: libaotlex_jni
+        path: |
+          ./jni/build/src/jni/libaotlex_jni.*
