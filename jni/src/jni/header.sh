@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-javac -h . aot/Aot.java
+javac -h . ../../../src/main/java/aot/Aot.java
